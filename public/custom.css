@@ -1,0 +1,11 @@
+/* Custom styles for Controle de Caixa */
+body { background: #fff; }
+.title-caixa, .menu-title, .contagem-title, .resultado-title, .notfound-title { color: fuchsia; font-size: 30px; text-align: center; }
+.logo { display: block; margin: 0 auto; width: 268px; }
+.input, .edit-qtd, .input-qtd { border: 2px solid fuchsia; }
+.label { color: fuchsia; font-weight: bold; }
+.button-entrar, .button-cadastrar, .menu-btn, .ajuste-btn, .revisar-btn, .recalcular-btn { background: linear-gradient(90deg, #ff69b4, #c3a1e5); color: #fff; font-weight: bold; }
+.logout-btn { background: #ff1493; color: #fff; }
+.cadastro-link span { color: fuchsia; }
+.cadastro-link a { color: #ff1493; font-weight: bold; }
+.total-dinheiro { color: #ff1493; }

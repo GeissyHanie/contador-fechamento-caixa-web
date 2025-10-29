@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Controle de Caixa - Login</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <style>
+    body { background: #fff; }
+    .logo { display: block; margin: 0 auto; width: 268px; }
+    .title-caixa { color: fuchsia; text-align: center; font-size: 30px; margin-top: 20px; }
+    .container-login { display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 30px; }
+    .field { display: flex; align-items: center; margin-bottom: 20px; }
+    .label { color: fuchsia; font-weight: bold; width: 100px; text-align: right; margin-right: 10px; }
+    .input { border: 2px solid fuchsia; width: 200px; }
+    .button-entrar { background: linear-gradient(90deg, #ff69b4, #c3a1e5); color: #fff; font-weight: bold; }
+    .mensagem { text-align: center; margin-top: 10px; }
+    .cadastro-link { text-align: center; margin-top: 20px; }
+    .cadastro-link span { color: fuchsia; }
+    .cadastro-link a { color: #ff1493; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <img src="/assets/logo_bomboniere.png" alt="Logo Bomboniere" class="logo">
+  <div class="title-caixa">Controle de Caixa</div>
+  <form class="container-login" method="POST" action="/login">
+    <div class="field">
+      <label class="label">Login</label>
+      <input class="input" type="text" name="login" required>
+    </div>
+    <div class="field">
+      <label class="label">Senha</label>
+      <input class="input" type="password" name="senha" required>
+    </div>
+    <button class="button button-entrar" type="submit">Entrar</button>
+    <% if (message) { %>
+      <div class="mensagem has-text-danger"><%= message %></div>
+    <% } %>
+    <div class="cadastro-link">
+      <span>Não tem uma conta?</span>
+      <a href="/register">Cadastrar-se</a>
+    </div>
+  </form>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Controle de Caixa - Menu</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <style>
+    .logo { display: block; margin: 0 auto; width: 268px; }
+    .menu-container { display: flex; flex-direction: column; align-items: center; margin-top: 40px; }
+    .menu-title { color: fuchsia; font-size: 30px; text-align: center; margin-bottom: 30px; }
+    .menu-btn { margin: 10px 0; width: 220px; font-size: 18px; font-weight: bold; background: linear-gradient(90deg, #ff69b4, #c3a1e5); color: #fff; border: none; border-radius: 6px; }
+    .logout-btn { background: #ff1493; color: #fff; }
+  </style>
+</head>
+<body>
+  <img src="/assets/logo_bomboniere.png" alt="Logo Bomboniere" class="logo">
+  <div class="menu-container">
+    <div class="menu-title">Menu</div>
+    <form method="GET" action="/contagem">
+      <button class="button menu-btn" type="submit">Contagem</button>
+    </form>
+    <form method="GET" action="/resultado">
+      <button class="button menu-btn" type="submit">Resultados</button>
+    </form>
+    <form method="POST" action="/menu/logout">
+      <button class="button menu-btn logout-btn" type="submit">Logout</button>
+    </form>
+  </div>
+</body>
+</html>

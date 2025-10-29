@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Controle de Caixa - Contagem</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <style>
+    .logo { display: block; margin: 0 auto; width: 268px; }
+    .contagem-container { display: flex; flex-direction: column; align-items: center; margin-top: 40px; }
+    .contagem-title { color: fuchsia; font-size: 30px; text-align: center; margin-bottom: 20px; }
+    .denom-img { width: 120px; margin-bottom: 10px; }
+    .input-qtd { width: 100px; text-align: center; border: 2px solid fuchsia; margin: 0 10px; }
+    .ajuste-btn { background: linear-gradient(90deg, #ff69b4, #c3a1e5); color: #fff; font-weight: bold; border: none; border-radius: 6px; width: 40px; }
+    .confirm-btn { background: #ff1493; color: #fff; font-weight: bold; margin-top: 20px; }
+    .mensagem { text-align: center; margin-top: 10px; }
+  </style>
+  <script>
+    function ajustarQtd(delta) {
+      var input = document.getElementById('quantidade');
+      var val = parseInt(input.value) || 0;
+      input.value = Math.max(0, val + delta);
+    }
+  </script>
+</head>
+<body>
+  <img src="/assets/logo_bomboniere.png" alt="Logo Bomboniere" class="logo">
+  <div class="contagem-container">
+    <div class="contagem-title">Controle de Caixa</div>
+    <div>
+      <% if (denom.tipo === 'nota') { %>
+        <img src="/assets/nota<%= denom.valor %>.jpeg" class="denom-img" alt="Nota <%= denom.valor %>">
+      <% } else { %>
+        <img src="/assets/moeda<%= denom.valor %>.png" class="denom-img" alt="Moeda <%= denom.valor %>">
+      <% } %>
+    </div>
+    <div>Informe a quantidade:</div>
+    <form method="POST" action="/contagem/next" style="display: flex; align-items: center; margin-top: 10px;">
+      <button type="button" class="button ajuste-btn" onclick="ajustarQtd(-1)">-</button>
+      <input id="quantidade" class="input input-qtd" type="number" name="quantidade" min="0" value="<%= total[idx] || 0 %>" required>
+      <button type="button" class="button ajuste-btn" onclick="ajustarQtd(1)">+</button>
+      <button class="button confirm-btn" type="submit" style="margin-left: 20px;">Confirmar e Próximo</button>
+    </form>
+    <% if (message) { %>
+      <div class="mensagem has-text-danger"><%= message %></div>
+    <% } %>
+  </div>
+</body>
+</html>

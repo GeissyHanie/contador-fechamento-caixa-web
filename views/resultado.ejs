@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Controle de Caixa - Resultado</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <style>
+    .logo { display: block; margin: 0 auto; width: 268px; }
+    .resultado-container { display: flex; flex-direction: column; align-items: center; margin-top: 40px; }
+    .resultado-title { color: fuchsia; font-size: 30px; text-align: center; margin-bottom: 20px; }
+    .total-dinheiro { font-size: 22px; color: #ff1493; margin-bottom: 20px; }
+    .mensagem { text-align: center; margin-top: 10px; }
+    .revisar-btn, .recalcular-btn { background: linear-gradient(90deg, #ff69b4, #c3a1e5); color: #fff; font-weight: bold; border: none; border-radius: 6px; margin: 10px 0; }
+    .edit-qtd { width: 60px; border: 2px solid fuchsia; text-align: center; }
+    table { margin-top: 20px; }
+    th, td { padding: 8px 12px; text-align: center; }
+    th { color: fuchsia; }
+  </style>
+</head>
+<body>
+  <img src="/assets/logo_bomboniere.png" alt="Logo Bomboniere" class="logo">
+  <div class="resultado-container">
+    <div class="resultado-title">Contagem Finalizada</div>
+    <div class="total-dinheiro">Total em dinheiro: R$ <%= total.toFixed(2) %></div>
+    <% if (!revisando) { %>
+      <form method="POST" action="/resultado/revisar">
+        <button class="button revisar-btn" type="submit">Revisar Contagem</button>
+      </form>
+    <% } %>
+    <% if (revisando) { %>
+      <form method="POST" action="/resultado/recalcular">
+        <table class="table is-bordered">
+          <thead>
+            <tr>
+              <th>Denominação</th>
+              <th>Quantidade</th>
+              <th>Valor Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% const DENOMINACOES = [200,100,50,20,10,5,2,1,0.5,0.25,0.1,0.05]; %>
+            <% for (let i = 0; i < DENOMINACOES.length; i++) { %>
+              <tr>
+                <td>R$ <%= DENOMINACOES[i] %></td>
+                <td><input class="edit-qtd" type="number" name="quantidades[]" value="<%= contagem[i] || 0 %>" min="0"></td>
+                <td>R$ <%= ((contagem[i] || 0) * DENOMINACOES[i]).toFixed(2) %></td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+        <button class="button recalcular-btn" type="submit">Recalcular Total</button>
+      </form>
+    <% } %>
+    <% if (message) { %>
+      <div class="mensagem has-text-success"><%= message %></div>
+    <% } %>
+  </div>
+</body>
+</html>
