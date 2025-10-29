@@ -5,14 +5,41 @@
   <title>Controle de Caixa - Contagem</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <style>
+    body { background: #fff; }
     .logo { display: block; margin: 0 auto; width: 268px; }
     .contagem-container { display: flex; flex-direction: column; align-items: center; margin-top: 40px; }
     .contagem-title { color: fuchsia; font-size: 30px; text-align: center; margin-bottom: 20px; }
     .denom-img { width: 120px; margin-bottom: 10px; }
     .input-qtd { width: 100px; text-align: center; border: 2px solid fuchsia; margin: 0 10px; }
     .ajuste-btn { background: linear-gradient(90deg, #ff69b4, #c3a1e5); color: #fff; font-weight: bold; border: none; border-radius: 6px; width: 40px; }
-    .confirm-btn { background: #ff1493; color: #fff; font-weight: bold; margin-top: 20px; }
     .mensagem { text-align: center; margin-top: 10px; }
+    .form-contagem {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+      gap: 10px;
+    }
+    .form-contagem-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .confirm-btn {
+      background: linear-gradient(90deg, #ff69b4, #c3a1e5);
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      margin-top: 18px;
+      width: 220px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+    .confirm-btn:hover {
+      box-shadow: 0 2px 8px rgba(255, 105, 180, 0.2);
+    }
   </style>
   <script>
     function ajustarQtd(delta) {
@@ -34,11 +61,13 @@
       <% } %>
     </div>
     <div>Informe a quantidade:</div>
-    <form method="POST" action="/contagem/next" style="display: flex; align-items: center; margin-top: 10px;">
-      <button type="button" class="button ajuste-btn" onclick="ajustarQtd(-1)">-</button>
-      <input id="quantidade" class="input input-qtd" type="number" name="quantidade" min="0" value="<%= total[idx] || 0 %>" required>
-      <button type="button" class="button ajuste-btn" onclick="ajustarQtd(1)">+</button>
-      <button class="button confirm-btn" type="submit" style="margin-left: 20px;">Confirmar e Próximo</button>
+    <form method="POST" action="/contagem/next" class="form-contagem">
+      <div class="form-contagem-row">
+        <button type="button" class="button ajuste-btn" onclick="ajustarQtd(-1)">-</button>
+        <input id="quantidade" class="input input-qtd" type="number" name="quantidade" min="0" value="<%= total[idx] || 0 %>" required>
+        <button type="button" class="button ajuste-btn" onclick="ajustarQtd(1)">+</button>
+      </div>
+      <button class="button confirm-btn" type="submit">Confirmar e Próximo</button>
     </form>
     <% if (message) { %>
       <div class="mensagem has-text-danger"><%= message %></div>
